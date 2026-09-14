@@ -4,6 +4,17 @@ A modern Attendance Management Web Application built using **HTML, CSS, and Java
 
 ---
 
+## 🚀 Live Demo
+
+🌐 **Try the deployed application:**  
+[Attendance Manager](https://attendance-tracker-puce-eight.vercel.app/)
+
+## 🔗 GitHub Repository
+
+[Attendance-Tracker](https://github.com/rudrasrisai07/Attendance-Tracker)
+
+---
+
 ## ✨ Features
 
 - 📅 Weekly Attendance Management
@@ -37,8 +48,9 @@ A modern Attendance Management Web Application built using **HTML, CSS, and Java
 
 # 📂 Project Structure
 
-```
+```text
 Attendance-Manager/
+
 │
 ├── index.html          # Main application
 ├── style.css           # Complete styling
@@ -66,25 +78,29 @@ All you need is a modern web browser such as:
 
 ## Installation
 
-Clone the repository
+Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Attendance-Manager.git
+git clone https://github.com/rudrasrisai07/Attendance-Tracker.git
 ```
 
-Open the project folder
+Open the project folder:
 
 ```bash
-cd Attendance-Manager
+cd Attendance-Tracker
 ```
 
-Launch the application by opening
+Launch the application by opening:
 
-```
+```text
 index.html
 ```
 
 No additional setup or dependencies are required.
+
+You can also use the deployed application directly:
+
+[https://attendance-tracker-puce-eight.vercel.app/](https://attendance-tracker-puce-eight.vercel.app/)
 
 ---
 
@@ -100,7 +116,7 @@ Choose the starting date for the semester.
 
 Click **Add Subject** to create new subjects.
 
-Enter
+Enter:
 
 - Subject Code
 - Subject Name
@@ -134,7 +150,7 @@ Attendance can be marked independently for each lecture.
 
 ### 5. View Statistics
 
-Every subject displays
+Every subject displays:
 
 - Total Present
 - Total Absent
@@ -168,7 +184,7 @@ Import the backup file anytime to restore the data.
 
 # 💾 Data Storage
 
-The application stores all attendance data using the browser's **Local Storage**.
+The application stores all attendance data using the **Local Storage**.
 
 No server or database is required.
 
@@ -193,7 +209,7 @@ Every lecture can be marked independently.
 
 ## Attendance Analytics
 
-The application automatically calculates
+The application automatically calculates:
 
 - Present Lectures
 - Absent Lectures
