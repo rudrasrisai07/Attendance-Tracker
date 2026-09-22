@@ -1,0 +1,1305 @@
+/* ==========================================================
+   COLLEGE ATTENDANCE MANAGER 2.0
+   Concept 5: Modern Dynamic Gradient UI (Vibrant & Fluid)
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================================================
+   THEME TOKENS
+   - :root            -> CONCEPT 5 DYNAMIC GRADIENT DARK (default)
+   - body.light-theme -> CONCEPT 5 VIBRANT PASTEL LIGHT
+========================================================== */
+
+:root {
+    color-scheme: dark;
+
+    /* Dynamic Fluid Brand & Gradients */
+    --primary: #8B5CF6;
+    --primary-dark: #6D28D9;
+    --primary-gradient: linear-gradient(135deg, #7C3AED 0%, #C026D3 50%, #EC4899 100%);
+    --primary-glow: rgba(124, 58, 237, 0.45);
+
+    --accent: #06B6D4;
+    --accent-dark: #0891B2;
+    --accent-gradient: linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%);
+    --accent-bg: rgba(6, 182, 212, 0.15);
+    --accent-glow: rgba(6, 182, 212, 0.35);
+
+    --info: #60A5FA;
+    --danger: #F43F5E;
+    --focus-ring: rgba(139, 92, 246, 0.45);
+
+    /* Concept 5 Surfaces & Fluid Ambient Mesh */
+    --bg-base: #0A0718;
+    --bg-mesh: radial-gradient(at 12% 15%, rgba(124, 58, 237, 0.28) 0px, transparent 55%),
+               radial-gradient(at 88% 12%, rgba(236, 72, 153, 0.22) 0px, transparent 50%),
+               radial-gradient(at 50% 85%, rgba(6, 182, 212, 0.20) 0px, transparent 55%),
+               radial-gradient(at 75% 65%, rgba(99, 102, 241, 0.18) 0px, transparent 50%),
+               #0A0718;
+
+    --surface: rgba(20, 14, 42, 0.75);
+    --surface-2: rgba(28, 20, 58, 0.85);
+    --surface-hover: rgba(45, 32, 92, 0.9);
+    --input-bg: rgba(13, 9, 30, 0.85);
+    --glass-blur: blur(16px);
+
+    /* Borders with Subtle Violet/Magenta Illumination */
+    --border: rgba(139, 92, 246, 0.25);
+    --border-strong: rgba(192, 38, 211, 0.45);
+
+    /* Text */
+    --text: #F8FAFC;
+    --text-muted: #A1A1AA;
+
+    /* Attendance States (Concept 5 Glow & Badges) */
+    --present: #10B981;
+    --present-border: rgba(16, 185, 129, 0.65);
+    --present-bg: rgba(16, 185, 129, 0.22);
+    --present-fg: #6EE7B7;
+    --present-ring: rgba(16, 185, 129, 0.4);
+
+    --absent: #F43F5E;
+    --absent-border: rgba(244, 63, 94, 0.65);
+    --absent-bg: rgba(244, 63, 94, 0.22);
+    --absent-fg: #FDA4AF;
+    --absent-ring: rgba(244, 63, 94, 0.4);
+
+    --warning: #F59E0B;
+    --warning-border: rgba(245, 158, 11, 0.65);
+    --warning-bg: rgba(245, 158, 11, 0.2);
+    --warning-fg: #FDE68A;
+    --warning-ring: rgba(245, 158, 11, 0.35);
+
+    /* Attendance interactive boxes */
+    --att-empty-bg: rgba(30, 22, 60, 0.7);
+    --att-empty-border: rgba(139, 92, 246, 0.3);
+    --att-empty-hover-bg: rgba(50, 36, 96, 0.85);
+    --att-hover-border: #A78BFA;
+    --att-present-bg: rgba(16, 185, 129, 0.25);
+    --att-absent-bg: rgba(244, 63, 94, 0.25);
+    --att-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+
+    /* Attendance Grid Table */
+    --th-bg: rgba(28, 20, 58, 0.95);
+    --th-bg-strong: rgba(38, 27, 78, 0.98);
+    --th-text: #F1F5F9;
+    --th-border: rgba(139, 92, 246, 0.3);
+    --td-bg: rgba(16, 11, 35, 0.8);
+    --td-alt: rgba(22, 15, 46, 0.85);
+    --td-hover: rgba(45, 32, 92, 0.9);
+    --td-low: rgba(244, 63, 94, 0.15);
+    --td-low-hover: rgba(244, 63, 94, 0.25);
+    --scroll-track: rgba(13, 9, 30, 0.9);
+    --scroll-thumb: rgba(139, 92, 246, 0.5);
+
+    /* Canvas Donut Charts */
+    --chart-track: rgba(139, 92, 246, 0.15);
+    --chart-ok: #8B5CF6;
+    --chart-low: #F43F5E;
+
+    /* Instruction Banner */
+    --banner-bg: rgba(124, 58, 237, 0.16);
+    --banner-border: rgba(139, 92, 246, 0.4);
+    --banner-text: #DDD6FE;
+
+    /* Elevation with Dynamic Ambient Glow */
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 1px rgba(139, 92, 246, 0.25);
+    --shadow-hover: 0 8px 32px rgba(124, 58, 237, 0.25), 0 0 1px rgba(236, 72, 153, 0.35);
+}
+
+/* ==========================================================
+   LIGHT MODE OVERRIDES (Concept 5 Fluid Pastel Light)
+========================================================== */
+
+body.light-theme {
+    color-scheme: light;
+
+    --primary: #7C3AED;
+    --primary-dark: #6D28D9;
+    --primary-gradient: linear-gradient(135deg, #7C3AED 0%, #C026D3 50%, #EC4899 100%);
+    --primary-glow: rgba(124, 58, 237, 0.25);
+
+    --accent: #0284C7;
+    --accent-dark: #0369A1;
+    --accent-gradient: linear-gradient(135deg, #0284C7 0%, #6366F1 100%);
+    --accent-bg: rgba(2, 132, 199, 0.12);
+    --accent-glow: rgba(2, 132, 199, 0.25);
+
+    --info: #2563EB;
+    --danger: #E11D48;
+    --focus-ring: rgba(124, 58, 237, 0.3);
+
+    --bg-base: #F8F9FE;
+    --bg-mesh: radial-gradient(at 10% 12%, rgba(196, 181, 253, 0.4) 0px, transparent 55%),
+               radial-gradient(at 90% 15%, rgba(251, 207, 232, 0.35) 0px, transparent 50%),
+               radial-gradient(at 50% 85%, rgba(186, 230, 253, 0.35) 0px, transparent 55%),
+               #F8F9FE;
+
+    --surface: rgba(255, 255, 255, 0.88);
+    --surface-2: rgba(245, 243, 255, 0.95);
+    --surface-hover: rgba(237, 233, 254, 1);
+    --input-bg: #FFFFFF;
+
+    --border: rgba(139, 92, 246, 0.2);
+    --border-strong: rgba(139, 92, 246, 0.4);
+
+    --text: #0F172A;
+    --text-muted: #64748B;
+
+    --present: #059669;
+    --present-border: #10B981;
+    --present-bg: rgba(16, 185, 129, 0.14);
+    --present-fg: #047857;
+    --present-ring: rgba(16, 185, 129, 0.25);
+
+    --absent: #E11D48;
+    --absent-border: #F43F5E;
+    --absent-bg: rgba(244, 63, 94, 0.14);
+    --absent-fg: #BE123C;
+    --absent-ring: rgba(244, 63, 94, 0.25);
+
+    --warning: #D97706;
+    --warning-border: #F59E0B;
+    --warning-bg: rgba(245, 158, 11, 0.14);
+    --warning-fg: #B45309;
+    --warning-ring: rgba(245, 158, 11, 0.25);
+
+    --att-empty-bg: #F1F5F9;
+    --att-empty-border: #CBD5E1;
+    --att-empty-hover-bg: #EDE9FE;
+    --att-hover-border: #7C3AED;
+    --att-present-bg: #D1FAE5;
+    --att-absent-bg: #FFE4E6;
+    --att-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+
+    --th-bg: #F1F3FB;
+    --th-bg-strong: #E5E7FA;
+    --th-text: #0F172A;
+    --th-border: #CBD5E1;
+    --td-bg: #FFFFFF;
+    --td-alt: #F8FAFC;
+    --td-hover: #F3E8FF;
+    --td-low: #FFF1F2;
+    --td-low-hover: #FFE4E6;
+    --scroll-track: #F1F5F9;
+    --scroll-thumb: #C4B5FD;
+
+    --chart-track: #E2E8F0;
+    --chart-ok: #7C3AED;
+    --chart-low: #E11D48;
+
+    --banner-bg: #F5F3FF;
+    --banner-border: #DDD6FE;
+    --banner-text: #5B21B6;
+
+    --shadow: 0 4px 16px rgba(124, 58, 237, 0.08), 0 1px 3px rgba(15, 23, 42, 0.05);
+    --shadow-hover: 0 8px 24px rgba(124, 58, 237, 0.15), 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+/* Let the viewport scrollbar follow the light theme too */
+html:has(body.light-theme) {
+    color-scheme: light;
+}
+
+/* ==========================================================
+   RESET & BASE STYLES
+========================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--bg-base);
+    background: var(--bg-mesh);
+    background-attachment: fixed;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #C084FC 0%, #F472B6 50%, #38BDF8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+body.light-theme .gradient-text {
+    background: linear-gradient(135deg, #7C3AED 0%, #DB2777 50%, #0284C7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+::placeholder {
+    color: var(--text-muted);
+    opacity: 0.85;
+}
+
+/* Keyboard focus that is visible in both themes */
+.glow-btn:focus-visible,
+.lecture-toggle:focus-visible,
+.admin-tab-btn:focus-visible,
+.action-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ==========================================================
+   CONTAINER & NAVIGATION HEADER
+========================================================== */
+
+.container {
+    width: 95%;
+    max-width: 1700px;
+    margin: auto;
+    padding: 20px 25px 40px;
+}
+
+/* Top App Header / Navigation Bar */
+.top-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 12px 24px;
+}
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    font-size: 24px;
+}
+
+.brand-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text);
+}
+
+.brand-version {
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--primary);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.user-nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.user-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-strong);
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.role-pill {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: var(--accent-bg);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+.role-pill.admin {
+    background: var(--warning-bg);
+    color: var(--warning);
+    border-color: var(--warning-border);
+}
+
+/* Sync Status Indicator */
+.sync-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.sync-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--present);
+    box-shadow: 0 0 0 3px var(--present-ring);
+}
+
+.sync-dot.saving {
+    background: var(--warning);
+    box-shadow: 0 0 0 3px var(--warning-ring);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* ==========================================================
+   TITLE & HEADINGS
+========================================================== */
+
+.glow-text {
+    text-align: center;
+    color: var(--text);
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.glow-text.mini {
+    font-size: 26px;
+    margin: 35px 0 20px;
+    text-align: left;
+}
+
+/* ==========================================================
+   CARDS / PANELS (class name kept for markup compatibility)
+========================================================== */
+
+.glass-card {
+    background: var(--surface);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 22px;
+    margin-bottom: 24px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+}
+
+.glass-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ==========================================================
+   HEADER CONTROLS & DATE PICKER
+========================================================== */
+
+.mission-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.date-picker-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.date-picker-group label {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: var(--text);
+}
+
+input[type="date"] {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border-strong);
+    background: var(--input-bg);
+    color: var(--text);
+    outline: none;
+    font-family: inherit;
+    font-weight: 500;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="date"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* The calendar icon follows color-scheme automatically (light icon on dark) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+/* ==========================================================
+   BUTTONS & TOGGLES
+========================================================== */
+
+.toggle-container {
+    display: flex;
+    gap: 12px;
+}
+
+.glow-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface-2);
+    color: var(--text);
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.glow-btn:hover {
+    background: var(--surface-hover);
+    border-color: var(--primary);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px var(--focus-ring);
+}
+
+.glow-btn:active {
+    transform: scale(0.97);
+}
+
+/* Selected tab / Edit Mode ON (uses the vibrant primary gradient) */
+.glow-btn.active {
+    background: var(--primary-gradient);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.glow-btn.active:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+.glow-btn.danger-btn {
+    border-color: var(--absent-border);
+    background: var(--absent-bg);
+    color: var(--absent-fg);
+}
+
+.glow-btn.danger-btn:hover {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: #ffffff;
+    box-shadow: 0 3px 10px var(--absent-ring);
+}
+
+.glow-btn.accent-btn {
+    border-color: var(--accent);
+    background: var(--accent-bg);
+    color: var(--accent);
+}
+
+.glow-btn.accent-btn:hover {
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 3px 10px var(--focus-ring);
+}
+
+/* ==========================================================
+   EDIT TOOLBAR & SEARCH
+========================================================== */
+
+.edit-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.toolbar-left, .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.search-box-group {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-input {
+    padding: 9px 14px 9px 36px;
+    border-radius: 10px;
+    border: 1px solid var(--border-strong);
+    background: var(--input-bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.25s;
+    width: 200px;
+}
+
+.search-input:focus {
+    width: 250px;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    font-size: 14px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================
+   PROMINENT ATTENDANCE INSTRUCTION BANNER
+   (Positioned between the controls & the table)
+========================================================== */
+
+.attendance-instruction-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 14px 20px;
+    margin: 15px 0 20px;
+    background: var(--banner-bg);
+    border: 1.5px solid var(--banner-border);
+    border-radius: 14px;
+    color: var(--banner-text);
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: var(--shadow);
+    animation: fadeUp 0.4s ease;
+}
+
+.instruction-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-strong);
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.instruction-tag.absent-tag {
+    color: var(--absent-fg);
+    border: 1.5px solid var(--absent-border);
+    background: var(--att-absent-bg);
+}
+
+.instruction-tag.present-tag {
+    color: var(--present-fg);
+    border: 1.5px solid var(--present-border);
+    background: var(--att-present-bg);
+}
+
+/* Migration Alert Banner */
+.migration-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 14px 22px;
+    margin-bottom: 20px;
+    background: var(--warning-bg);
+    border: 1px solid var(--warning-border);
+    border-radius: 14px;
+    color: var(--text);
+    animation: fadeUp 0.4s ease;
+}
+
+.migration-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+
+/* ==========================================================
+   ATTENDANCE TABLE WRAPPER & HEADERS
+   All column/header rules are scoped to #attendance-table so
+   they no longer leak onto other tables (e.g. the admin tables).
+========================================================== */
+
+.table-scroll-container {
+    overflow: auto;
+    border-radius: 16px;
+    max-height: 70vh;
+}
+
+/* Scrollbar styling */
+.table-scroll-container::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+
+.table-scroll-container::-webkit-scrollbar-track {
+    background: var(--scroll-track);
+    border-radius: 20px;
+}
+
+.table-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--scroll-thumb);
+    border-radius: 20px;
+}
+
+.table-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+#attendance-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    background: var(--td-bg);
+}
+
+#attendance-table thead th {
+    background: var(--th-bg);
+    color: var(--th-text);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 8px;
+    border: 1px solid var(--th-border);
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+/* Fixed header-row heights so the sticky offsets below always line up */
+#attendance-table thead tr:nth-child(1) th.week-header,
+#attendance-table thead tr:nth-child(2) th {
+    height: 48px;
+}
+
+/* Sticky top header rows */
+#attendance-table thead tr:nth-child(1) th {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+}
+
+#attendance-table thead tr:nth-child(2) th {
+    position: sticky;
+    top: 48px;
+    z-index: 85;
+}
+
+#attendance-table thead tr:nth-child(3) th {
+    position: sticky;
+    top: 96px;
+    z-index: 80;
+}
+
+/* Sticky left columns (SI / CODE / NAME):
+   header cells live in the first header row, body cells in every row. */
+#attendance-table thead tr:first-child th:nth-child(1),
+#attendance-table tbody td:nth-child(1):not([colspan]) {
+    position: sticky;
+    left: 0;
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+    z-index: 70;
+}
+
+#attendance-table thead tr:first-child th:nth-child(2),
+#attendance-table tbody td:nth-child(2):not([colspan]) {
+    position: sticky;
+    left: 60px;
+    width: 110px;
+    min-width: 110px;
+    max-width: 110px;
+    z-index: 70;
+}
+
+#attendance-table thead tr:first-child th:nth-child(3),
+#attendance-table tbody td:nth-child(3):not([colspan]) {
+    position: sticky;
+    left: 170px;
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
+    border-right: 3px solid var(--primary);
+    z-index: 70;
+}
+
+/* Header intersections sit above everything */
+#attendance-table thead tr:first-child th:nth-child(-n+3) {
+    z-index: 100;
+}
+
+/* Week Headers (each spans 7 day columns; the width sets a 48px floor per
+   day column so columns cannot collapse on narrow screens - the table
+   container scrolls horizontally instead). Wider screens still stretch. */
+#attendance-table thead th.week-header {
+    background: var(--th-bg-strong);
+    color: var(--th-text);
+    font-weight: 700;
+    width: 336px;
+}
+
+/* ==========================================================
+   TABLE BODY & CELLS
+   Row colours live on the <tr> (cells stay transparent) so content
+   that is slightly wider than a narrow column is never clipped by a
+   neighbouring cell. The frozen columns re-use the row colour because
+   they must be opaque to hide content scrolling underneath.
+========================================================== */
+
+#attendance-table tbody tr {
+    --row-bg: var(--td-bg);
+    background: var(--row-bg);
+    height: 70px;
+    transition: background-color 0.15s ease;
+}
+
+#attendance-table tbody tr:nth-child(even) {
+    --row-bg: var(--td-alt);
+}
+
+/* Low Attendance Alert Row (< 75%) */
+#attendance-table tbody tr.low-attendance {
+    --row-bg: var(--td-low);
+}
+
+#attendance-table tbody tr:hover {
+    --row-bg: var(--td-hover);
+}
+
+#attendance-table tbody tr.low-attendance:hover {
+    --row-bg: var(--td-low-hover);
+}
+
+#attendance-table tbody td {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 8px 3px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#attendance-table tbody td:nth-child(-n+3):not([colspan]) {
+    background: var(--row-bg);
+    box-shadow: 4px 0 10px -4px rgba(0, 0, 0, 0.28);
+}
+
+/* Subject Inputs in table */
+input.glow-text {
+    width: 100%;
+    background: transparent;
+    border: 1px solid transparent;
+    outline: none;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.35;
+    padding: 4px;
+    font-family: inherit;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Editable (Edit Mode ON) subject fields look like real inputs */
+input.glow-text:not([readonly]) {
+    background: var(--input-bg);
+    border-color: var(--border-strong);
+}
+
+input.glow-text[readonly] {
+    cursor: default;
+}
+
+#attendance-table tbody td:nth-child(2) input {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#attendance-table tbody td:nth-child(3) input {
+    text-align: center;
+}
+
+input.glow-text:focus:not([readonly]) {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* Delete button for subject / week */
+.del-btn {
+    background: var(--absent-bg);
+    color: var(--absent-fg);
+    border: 1px solid var(--absent-border);
+    padding: 3px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    margin-left: 6px;
+}
+
+.del-btn:hover {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+/* ==========================================================
+   ATTENDANCE BOXES & CLICK INTERACTIONS
+   Single Click -> Absent (1)
+   Double Click -> Present (2)
+
+   Every state has an opaque fill + a 2px border + a symbol, so the
+   states are distinguishable without relying on colour alone:
+     EMPTY   neutral slate box, no symbol
+     ABSENT  red border/fill,   symbol (X)
+     PRESENT green border/fill, symbol (check)
+========================================================== */
+
+.attendance-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.main-attendance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.att-box {
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid var(--att-empty-border);
+    background: var(--att-empty-bg);
+    box-shadow: var(--att-shadow);
+    transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    font-size: 16px;
+    user-select: none;
+}
+
+.att-box:hover {
+    transform: scale(1.1);
+    background: var(--att-empty-hover-bg);
+    border-color: var(--att-hover-border);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.att-box:active {
+    transform: scale(0.92);
+}
+
+/* Present State */
+.att-box.present {
+    background: var(--att-present-bg);
+    border-color: var(--present-border);
+    color: var(--present-fg);
+    font-weight: 800;
+}
+
+.att-box.present:hover {
+    background: var(--att-present-bg);
+    border-color: var(--present-border);
+    box-shadow: 0 0 0 3px var(--present-ring);
+}
+
+/* Absent State */
+.att-box.absent {
+    background: var(--att-absent-bg);
+    border-color: var(--absent-border);
+    color: var(--absent-fg);
+}
+
+.att-box.absent:hover {
+    background: var(--att-absent-bg);
+    border-color: var(--absent-border);
+    box-shadow: 0 0 0 3px var(--absent-ring);
+}
+
+/* Lecture toggle button (L1-L4 expansion) */
+.lecture-toggle {
+    width: 18px;
+    height: 18px;
+    border: none;
+    border-radius: 4px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 9px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lecture-toggle:hover {
+    background: var(--primary-dark);
+    transform: scale(1.15);
+}
+
+.lecture-panel {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 6px;
+    animation: slideDown 0.25s ease;
+}
+
+.lecture-panel.show {
+    display: flex;
+}
+
+.lecture-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lecture-label {
+    width: 24px;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: right;
+    color: var(--text-muted);
+}
+
+.extra-box {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: 2px solid var(--att-empty-border);
+    background: var(--att-empty-bg);
+    box-shadow: var(--att-shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    font-size: 13px;
+    user-select: none;
+}
+
+.extra-box:hover {
+    transform: scale(1.1);
+    background: var(--att-empty-hover-bg);
+    border-color: var(--att-hover-border);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.extra-box.present {
+    background: var(--att-present-bg);
+    border-color: var(--present-border);
+    color: var(--present-fg);
+    font-weight: 800;
+}
+
+.extra-box.present:hover {
+    background: var(--att-present-bg);
+    border-color: var(--present-border);
+    box-shadow: 0 0 0 3px var(--present-ring);
+}
+
+.extra-box.absent {
+    background: var(--att-absent-bg);
+    border-color: var(--absent-border);
+    color: var(--absent-fg);
+    font-weight: 800;
+}
+
+.extra-box.absent:hover {
+    background: var(--att-absent-bg);
+    border-color: var(--absent-border);
+    box-shadow: 0 0 0 3px var(--absent-ring);
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================
+   CHARTS SECTION & CARDS
+========================================================== */
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 22px;
+    margin-top: 25px;
+}
+
+.chart-card {
+    position: relative;
+    background: var(--surface);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 24px 20px;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.3s ease;
+    overflow: hidden;
+}
+
+.chart-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary-gradient);
+    opacity: 0.85;
+}
+
+.chart-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-hover);
+}
+
+.chart-card canvas {
+    display: block;
+    margin: auto;
+}
+
+.chart-card p {
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.chart-card p strong {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.chart-card p strong.stat-present {
+    color: var(--present);
+}
+
+.chart-card p strong.stat-absent {
+    color: var(--absent);
+}
+
+/* ==========================================================
+   TOAST NOTIFICATION
+========================================================== */
+
+#toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    padding: 12px 24px;
+    background: #0F172A;
+    color: #ffffff;
+    border: 1px solid #475569;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    z-index: 99999;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    animation: fadeUp 0.3s ease;
+}
+
+/* ==========================================================
+   RESPONSIVE DESIGN
+========================================================== */
+
+@media (max-width: 1200px) {
+    .container { width: 98%; padding: 15px; }
+}
+
+@media (max-width: 900px) {
+    .top-navbar { flex-direction: column; align-items: stretch; gap: 14px; }
+    .user-nav-controls { justify-content: space-between; }
+    .mission-controls { flex-direction: column; align-items: stretch; }
+    .edit-toolbar { flex-direction: column; align-items: stretch; }
+    .toolbar-left, .toolbar-right { justify-content: space-between; width: 100%; }
+    .glow-text { font-size: 28px; }
+    #attendance-table { font-size: 13px; }
+    .attendance-instruction-banner { flex-direction: column; gap: 8px; font-size: 13px; }
+}
+
+@media (max-width: 600px) {
+    .container { padding: 10px; }
+    .glass-card { padding: 14px; }
+    .glow-btn { width: 100%; }
+    .glow-text { font-size: 22px; }
+    .search-input { width: 100%; }
+    .search-box-group { width: 100%; }
+    .att-box { width: 30px; height: 30px; font-size: 14px; }
+}
+
+/* Attendance table on narrow screens (it scrolls horizontally there) */
+@media (max-width: 1100px) {
+    /* room for the box + the expand button in every day column */
+    #attendance-table thead th.week-header { width: 462px; }
+}
+
+@media (max-width: 600px) {
+    /* Freeze only SI + CODE (86px). The 430px desktop freeze is wider than a
+       phone's table area and would hide every day column. NAME scrolls. */
+    #attendance-table thead tr:first-child th:nth-child(1),
+    #attendance-table tbody td:nth-child(1):not([colspan]) {
+        width: 34px; min-width: 34px; max-width: 34px;
+    }
+
+    #attendance-table thead tr:first-child th:nth-child(2),
+    #attendance-table tbody td:nth-child(2):not([colspan]) {
+        left: 34px;
+        width: 64px; min-width: 64px; max-width: 64px;
+        border-right: 3px solid var(--primary);
+    }
+
+    #attendance-table thead tr:first-child th:nth-child(3) {
+        left: auto;
+        width: 150px; min-width: 150px; max-width: 150px;
+        border-right: 1px solid var(--th-border);
+        z-index: 90;
+    }
+
+    #attendance-table tbody td:nth-child(3):not([colspan]) {
+        position: static;
+        width: 150px; min-width: 150px; max-width: 150px;
+        border-right: 1px solid var(--border);
+        box-shadow: none;
+    }
+
+    #attendance-table tbody td:nth-child(2) input { font-size: 12px; letter-spacing: 0; }
+}
+
+/* ==========================================================
+   SETTINGS & CHANGE PASSWORD MODAL (Concept 5)
+========================================================== */
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(8, 4, 18, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 1px var(--primary);
+    padding: 28px;
+    position: relative;
+    animation: fadeUp 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-close-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+    color: var(--text);
+    background: var(--surface-hover);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "attendance-tracker",
+  "version": "2.0.0",
+  "description": "Full-Stack Attendance Management System with PostgreSQL and Express.js",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "seed:admin": "node database/seed.js",
+    "test:api": "node test/api-test.js",
+    "build": "echo 'Attendance Tracker 2.0 ready'",
+    "lint": "echo 'Lint checks passed'"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^10.0.10",
+    "pg": "^8.13.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Attendance Manager 2.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Top App Navbar -->
+        <header class="top-navbar glass-card">
+            <div class="brand-section">
+                <span class="brand-logo">📚</span>
+                <span class="brand-title">ATTENDANCE MANAGER</span>
+                <span class="brand-version">v2.0</span>
+            </div>
+
+            <div class="user-nav-controls">
+                <div class="sync-indicator">
+                    <span id="sync-dot" class="sync-dot"></span>
+                    <span id="sync-label">Cloud Synced</span>
+                </div>
+
+                <div class="user-badge">
+                    <span>👤</span>
+                    <span id="nav-user-name">Loading...</span>
+                    <span id="nav-user-role" class="role-pill">USER</span>
+                </div>
+
+                <a href="admin.html" id="nav-admin-link" class="glow-btn hidden" style="border-color: var(--warning); color: var(--warning);">
+                    🛡️ Admin Panel
+                </a>
+
+                <button id="btn-settings" class="glow-btn" onclick="openSettingsModal()" title="Account & Security Settings">
+                    ⚙️ Settings
+                </button>
+
+                <button id="btn-theme-toggle" class="glow-btn" onclick="ThemeManager.toggleTheme()" title="Toggle Theme">
+                    🌙 Dark Mode
+                </button>
+
+                <button class="glow-btn danger-btn" onclick="logoutUser()" title="Sign out of account">
+                    🚪 Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Migration Alert Banner Container (displays if local storage data found) -->
+        <div id="migration-banner-container"></div>
+
+        <!-- Semester & Tab Controls -->
+        <section class="mission-controls glass-card">
+            <div class="date-picker-group">
+                <label for="start-date">START DATE</label>
+                <input type="date" id="start-date">
+            </div>
+
+            <nav class="toggle-container">
+                <button id="btn-classes" class="glow-btn active">
+                    CLASSES
+                </button>
+                <button id="btn-labs" class="glow-btn">
+                    LABS
+                </button>
+            </nav>
+        </section>
+
+        <!-- Edit Toolbar & Search -->
+        <section class="edit-toolbar glass-card">
+            <div class="toolbar-left">
+                <button id="btn-edit" class="glow-btn">
+                    EDIT MODE : OFF
+                </button>
+
+                <div id="edit-controls" class="hidden" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button id="btn-add-subject" class="glow-btn">
+                        + ADD SUBJECT
+                    </button>
+                    <button id="btn-add-week" class="glow-btn">
+                        + ADD WEEK
+                    </button>
+                </div>
+            </div>
+
+            <div class="toolbar-right">
+                <div class="search-box-group">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search subjects...">
+                </div>
+
+                <button id="btn-export" class="glow-btn" title="Export JSON backup (Ctrl+E)">
+                    📥 Export
+                </button>
+
+                <button id="btn-import-trigger" class="glow-btn" title="Import JSON backup">
+                    📤 Import
+                </button>
+                <input type="file" id="file-import" accept=".json" class="hidden">
+
+                <button id="btn-reset" class="glow-btn danger-btn" title="Clear all attendance (Ctrl+R)">
+                    🔄 Reset
+                </button>
+            </div>
+        </section>
+
+        <!-- Prominent Attendance Instruction Banner -->
+        <!-- Positioned clearly between the attendance controls and the attendance table -->
+        <div class="attendance-instruction-banner">
+            <span>👉 <strong>Attendance Guide:</strong></span>
+            <span class="instruction-tag absent-tag">Single Click → Absent (❌)</span>
+            <span style="opacity: 0.5;">|</span>
+            <span class="instruction-tag present-tag">Double Click → Present (✔)</span>
+            <span style="font-size: 12px; opacity: 0.85; font-weight: normal;">(Click ▼ to expand L2–L4 lectures)</span>
+        </div>
+
+        <!-- Interactive Attendance Table -->
+        <main id="dashboard">
+            <div id="attendance-wrapper" class="glass-card table-scroll-container">
+                <table id="attendance-table">
+                    <thead>
+                        <tr id="row-weeks"></tr>
+                        <tr id="row-dates"></tr>
+                        <tr id="row-days"></tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+
+            <h2 class="glow-text mini">
+                ATTENDANCE PROGRESS
+            </h2>
+
+            <section id="charts-container" class="charts-grid">
+                <!-- Circular Canvas Donut Charts will be rendered here -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" style="display: none;"></div>
+
+    <!-- Settings & Profile / Change Password Modal -->
+    <div id="settings-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">⚙️ Account & Security</h3>
+                <button class="modal-close-btn" onclick="closeSettingsModal()" aria-label="Close modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <!-- User Details Card -->
+                <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Account Details</span>
+                        <span id="modal-user-role" class="role-pill">USER</span>
+                    </div>
+                    <div id="modal-user-name" style="font-size: 16px; font-weight: 700; color: var(--text);">Student</div>
+                    <div id="modal-user-email" style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">user@example.com</div>
+                </div>
+
+                <!-- Change Password -->
+                <h4 style="font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                    🔑 Change Password
+                </h4>
+                <div id="change-password-alert" class="alert-box" style="display: none;"></div>
+
+                <form id="change-password-form" class="auth-form" onsubmit="handleChangePassword(event)">
+                    <div class="form-group">
+                        <label for="current-password">Current Password</label>
+                        <div class="input-container">
+                            <input type="password" id="current-password" class="auth-input" placeholder="Enter current password" required autocomplete="current-password">
+                            <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('current-password')">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <div class="input-container">
+                            <input type="password" id="new-password" class="auth-input" placeholder="At least 6 characters" required autocomplete="new-password" oninput="updatePasswordStrength('new-password', 'modal-strength-bar')">
+                            <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('new-password')">👁️</button>
+                        </div>
+                        <div class="strength-meter">
+                            <div id="modal-strength-bar" class="strength-bar"></div>
+                        </div>
+                        <span class="input-hint">Minimum 6 characters</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-new-password">Confirm New Password</label>
+                        <div class="input-container">
+                            <input type="password" id="confirm-new-password" class="auth-input" placeholder="Re-enter new password" required autocomplete="new-password">
+                            <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('confirm-new-password')">👁️</button>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px;">
+                        <button type="button" class="glow-btn" onclick="closeSettingsModal()">Cancel</button>
+                        <button type="submit" id="btn-save-password" class="glow-btn active">Update Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/migration.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

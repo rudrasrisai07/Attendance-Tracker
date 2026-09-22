@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Attendance Manager 2.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+    <!-- Theme Toggle in top-right corner -->
+    <div class="theme-corner-toggle">
+        <button id="btn-theme-toggle" class="glow-btn" onclick="ThemeManager.toggleTheme()">
+            🌙 Dark Mode
+        </button>
+    </div>
+
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div style="font-size: 40px; margin-bottom: 10px;">📋</div>
+                <h1>Welcome Back</h1>
+                <p class="auth-subtitle">Sign in to manage your college attendance records</p>
+            </div>
+
+            <div id="auth-alert" class="alert-box"></div>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <div class="input-container">
+                        <input
+                            type="email"
+                            id="login-email"
+                            class="auth-input"
+                            placeholder="student@college.edu"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <label for="login-password">Password</label>
+                        <button type="button" id="link-show-forgot" class="text-link" style="background: none; border: none; font-size: 12px; cursor: pointer; color: var(--accent); padding: 0;">
+                            Forgot Password?
+                        </button>
+                    </div>
+                    <div class="input-container">
+                        <input
+                            type="password"
+                            id="login-password"
+                            class="auth-input"
+                            placeholder="Enter your password"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button
+                            type="button"
+                            class="password-toggle-btn"
+                            data-target="login-password"
+                            title="Show/Hide Password"
+                        >👁️</button>
+                    </div>
+                </div>
+
+                <button type="submit" id="login-submit-btn" class="auth-submit-btn">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- Toggleable Forgot Password Form -->
+            <form id="forgot-form" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label for="forgot-email">Account Email Address</label>
+                    <div class="input-container">
+                        <input
+                            type="email"
+                            id="forgot-email"
+                            class="auth-input"
+                            placeholder="student@college.edu"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                    <span class="input-hint">We'll dispatch a single-use 15-minute reset link</span>
+                </div>
+
+                <button type="submit" id="forgot-submit-btn" class="auth-submit-btn">
+                    Send Reset Link
+                </button>
+
+                <button type="button" id="link-back-to-login" class="glow-btn" style="width: 100%; text-align: center;">
+                    ← Back to Sign In
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                Don't have an account yet?
+                <a href="register.html" class="auth-link">Create Account</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account — Attendance Manager 2.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+    <!-- Theme Toggle in top-right corner -->
+    <div class="theme-corner-toggle">
+        <button id="btn-theme-toggle" class="glow-btn" onclick="ThemeManager.toggleTheme()">
+            🌙 Dark Mode
+        </button>
+    </div>
+
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div style="font-size: 40px; margin-bottom: 10px;">🚀</div>
+                <h1>Create Account</h1>
+                <p class="auth-subtitle">Join Attendance Manager 2.0 to track your semester attendance</p>
+            </div>
+
+            <div id="auth-alert" class="alert-box"></div>
+
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            id="register-name"
+                            class="auth-input"
+                            placeholder="e.g. Rudra Sri Sai"
+                            required
+                            autocomplete="name"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-email">Email Address</label>
+                    <div class="input-container">
+                        <input
+                            type="email"
+                            id="register-email"
+                            class="auth-input"
+                            placeholder="student@college.edu"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <div class="input-container">
+                        <input
+                            type="password"
+                            id="register-password"
+                            class="auth-input"
+                            placeholder="Minimum 6 characters"
+                            required
+                            autocomplete="new-password"
+                        >
+                        <button
+                            type="button"
+                            class="password-toggle-btn"
+                            data-target="register-password"
+                            title="Show/Hide Password"
+                        >👁️</button>
+                    </div>
+                    <div class="strength-meter">
+                        <div id="strength-bar" class="strength-bar"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-confirm-password">Confirm Password</label>
+                    <div class="input-container">
+                        <input
+                            type="password"
+                            id="register-confirm-password"
+                            class="auth-input"
+                            placeholder="Re-enter password"
+                            required
+                            autocomplete="new-password"
+                        >
+                        <button
+                            type="button"
+                            class="password-toggle-btn"
+                            data-target="register-confirm-password"
+                            title="Show/Hide Password"
+                        >👁️</button>
+                    </div>
+                </div>
+
+                <button type="submit" id="register-submit-btn" class="auth-submit-btn">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                Already registered?
+                <a href="login.html" class="auth-link">Sign In</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

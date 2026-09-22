@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Dashboard — Attendance Manager 2.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Admin Navigation Header -->
+        <header class="top-navbar glass-card">
+            <div class="brand-section">
+                <span class="brand-logo">🛡️</span>
+                <span class="brand-title">ADMINISTRATOR PORTAL</span>
+                <span class="role-pill admin">ADMIN</span>
+            </div>
+
+            <div class="user-nav-controls">
+                <div class="user-badge">
+                    <span>👑</span>
+                    <span id="admin-name">Admin</span>
+                </div>
+
+                <a href="index.html" class="glow-btn" title="Go to student attendance dashboard">
+                    📊 Student View
+                </a>
+
+                <button id="btn-theme-toggle" class="glow-btn" onclick="ThemeManager.toggleTheme()" title="Toggle Theme">
+                    🌙 Dark Mode
+                </button>
+
+                <button class="glow-btn danger-btn" onclick="logoutUser()" title="Sign out">
+                    🚪 Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="admin-nav-tabs">
+            <button class="admin-tab-btn active" data-tab="overview">
+                📈 Dashboard Overview
+            </button>
+            <button class="admin-tab-btn" data-tab="users">
+                👥 User Management
+            </button>
+            <button class="admin-tab-btn" data-tab="attendance">
+                🔍 Attendance Inspector
+            </button>
+            <button class="admin-tab-btn" data-tab="reports">
+                📑 System Reports
+            </button>
+        </div>
+
+        <!-- TAB 1: OVERVIEW -->
+        <section id="tab-overview" class="admin-tab-content">
+            <div class="stat-cards-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Total Users</span>
+                        <span class="stat-icon">👥</span>
+                    </div>
+                    <div id="stat-total-users" class="stat-value">—</div>
+                    <div class="stat-footer">Registered student accounts</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Active Accounts</span>
+                        <span class="stat-icon">✅</span>
+                    </div>
+                    <div id="stat-active-users" class="stat-value" style="color: var(--present);">—</div>
+                    <div class="stat-footer">Currently enabled users</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Total Subjects</span>
+                        <span class="stat-icon">📚</span>
+                    </div>
+                    <div id="stat-total-subjects" class="stat-value" style="color: var(--accent);">—</div>
+                    <div class="stat-footer">Classes & Labs configured</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">System Attendance</span>
+                        <span class="stat-icon">📊</span>
+                    </div>
+                    <div id="stat-avg-attendance" class="stat-value" style="color: var(--info);">—</div>
+                    <div class="stat-footer">Average attendance percentage</div>
+                </div>
+            </div>
+
+            <!-- Secondary Metrics -->
+            <div class="stat-cards-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Attendance Entries</span>
+                        <span class="stat-icon">📝</span>
+                    </div>
+                    <div id="stat-total-records" class="stat-value">—</div>
+                    <div class="stat-footer">Total recorded lecture slots</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Present Marks</span>
+                        <span class="stat-icon">✔</span>
+                    </div>
+                    <div id="stat-present-count" class="stat-value" style="color: var(--present);">—</div>
+                    <div class="stat-footer">Lectures attended</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Absent Marks</span>
+                        <span class="stat-icon">❌</span>
+                    </div>
+                    <div id="stat-absent-count" class="stat-value" style="color: var(--absent);">—</div>
+                    <div class="stat-footer">Lectures missed</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: USER MANAGEMENT -->
+        <section id="tab-users" class="admin-tab-content hidden">
+            <div class="filter-bar glass-card">
+                <div class="search-box-group" style="flex: 1; min-width: 250px;">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="user-search-input" class="search-input" style="width: 100%;" placeholder="Search by student name or email...">
+                </div>
+
+                <div class="filter-group">
+                    <select id="user-role-filter" class="filter-select">
+                        <option value="">All Roles</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+
+                    <select id="user-status-filter" class="filter-select">
+                        <option value="">All Statuses</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Registration Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <!-- Populated dynamically by admin.js -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TAB 3: ATTENDANCE INSPECTOR -->
+        <section id="tab-attendance" class="admin-tab-content hidden">
+            <div class="glass-card" style="margin-bottom: 20px;">
+                <label for="inspect-user-select" style="font-size: 14px; font-weight: 600; margin-right: 12px;">
+                    Select Student to Inspect:
+                </label>
+                <select id="inspect-user-select" class="filter-select" style="min-width: 280px;">
+                    <option value="">-- Choose a student --</option>
+                </select>
+            </div>
+
+            <div id="inspect-results-container">
+                <div style="text-align: center; color: var(--text-muted); padding: 40px;" class="glass-card">
+                    Select a student from the dropdown above to inspect their subject attendance and performance.
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: REPORTS -->
+        <section id="tab-reports" class="admin-tab-content hidden">
+            <div class="glass-card">
+                <h3 style="margin-bottom: 15px;">System Attendance Summary</h3>
+                <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">
+                    This report aggregates all student submissions across academic subjects and laboratory sections. 
+                    Administrators can monitor overall compliance, identify subjects with historically low attendance, 
+                    and verify that records are accurately persisted in the PostgreSQL database.
+                </p>
+                <div style="margin-top: 20px;">
+                    <button class="glow-btn" onclick="window.print()">
+                        🖨️ Print / Save PDF Summary
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
