@@ -25,6 +25,37 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 const frontendDir = path.join(__dirname, '..', 'frontend');
 app.use(express.static(frontendDir));
 
+
+let dbInitPromise;
+
+app.use('/api', async (req, res, next) => {
+    try {
+        if (!dbInitPromise) {
+            dbInitPromise = initDatabase();
+        }
+
+        await dbInitPromise;
+
+        if (
+            process.env.NODE_ENV === 'production' &&
+            !isDbConnected()
+        ) {
+            return res.status(503).json({
+                success: false,
+                message: 'Database is temporarily unavailable.'
+            });
+        }
+
+        next();
+    } catch (error) {
+        console.error('Database initialization failed:', error.message);
+        return res.status(503).json({
+            success: false,
+            message: 'Database is temporarily unavailable.'
+        });
+    }
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/subjects', subjectsRoutes);
