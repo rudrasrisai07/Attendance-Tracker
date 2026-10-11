@@ -1,4 +1,13 @@
 # 📚 College Attendance Manager 2.0 — Full-Stack Edition
+
+## 🌐 Live Demo
+
+**Live Website:** https://attendance-tracker-puce-eight.vercel.app/login.html
+
+**GitHub Repository:** https://github.com/rudrasrisai07/Attendance-Tracker
+
+The application is deployed on Vercel, with PostgreSQL hosted on Neon.
+
 ### Concept 5: Modern Dynamic Gradient UI (Vibrant & Fluid)
 
 A production-ready, full-stack Attendance Management Web Application built with **Vanilla HTML5, CSS3, JavaScript (ES6+), Node.js, Express.js, and PostgreSQL**. The system allows students and instructors to track lecture attendance across dynamic subjects and multi-week semesters, with full password recovery, in-app security settings, and an institution-grade Administrator portal for student auditing.
